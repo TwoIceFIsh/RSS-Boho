@@ -1,0 +1,10 @@
+[공지] 우크라이나 사태 장기화 등 사이버 위협 증가에 따른 보안 강화 요청 URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=66755  2022.06.10 
+[공지] 국내·외 사이버 위협 우려가 고조됨에 따라 '주의' 경보 발령 URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=36506  2022.03.21 
+[공지] Apache Log4j 보안 업데이트 권고(CVE-2021-45105, 44832, CVE-2022-23302, 23305, 23307) (Update. 22-1-21 17:00) URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=36397  2021.12.18 
+1753 Cisco 제품 보안 업데이트 권고 URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=66773  2022.06.16 
+1752 Internet Explorer 11 기술지원 종료 관련 보안 권고 URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=66764  2022.06.15 
+1751 Zimbra 제품 보안 업데이트 권고 URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=66763  2022.06.15 
+1750 SAP 제품 취약점 보안 업데이트 권고 URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=66762  2022.06.15 
+1749 Adobe 제품 보안 업데이트 권고 URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=66761  2022.06.15 
+1748 Envoy Proxy 보안 업데이트 권고 URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=66760  2022.06.15 
+1747 Citrix 제품 보안 업데이트 권고 URL : https://www.boho.or.kr/data/secNoticeView.do?bulletin_writing_sequence=66759  2022.06.15 
