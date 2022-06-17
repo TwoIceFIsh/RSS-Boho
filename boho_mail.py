@@ -1,6 +1,7 @@
 import datetime
 import time
 from mail_func import *
+import PyQt5
 
 while True:
     print('Scanning : ' + str(datetime.datetime.now()))
@@ -10,7 +11,10 @@ while True:
     new_article_list = get_data(url='https://www.boho.or.kr/data/secNoticeList.do')
     newest_article = what_is_new_article(article_list=article_list, new_article_list=new_article_list)
 
-    # 신규 게시글 파일 작성성
+
+
+
+    # 신규 게시글 파일 작성
     file_set_article(file_name='./article_lists.txt', articles=new_article_list)
 
     # 이메일 보내기
