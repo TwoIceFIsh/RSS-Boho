@@ -22,7 +22,7 @@ def sendMail(article: str,new_num: int , to_ad: str):
         # SMTP 계정 인증 설정
         session.ehlo()
         session.starttls()
-        session.login('igloosoil@gmail.com', 'lougwydyuijffjcd')
+        session.login('GOOGLE_ID', 'APP_PW')
 
         # 메일 콘텐츠 설정
         message = MIMEMultipart("mixed")
