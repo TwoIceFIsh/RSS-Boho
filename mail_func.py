@@ -41,8 +41,7 @@ def sendMail(article: str,new_num: int , to_ad: str):
         session.sendmail(from_addr, to_addr, message.as_string())
 
     except Exception as e:
-        None
-        # print(e)
+        print(e)
     finally:
         if session is not None:
             session.quit()
