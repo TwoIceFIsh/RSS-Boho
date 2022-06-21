@@ -1,22 +1,15 @@
 # boho_project
 KISA 보호나라 보안공지 신규 게시물 알림 1.0v
 
+
 **설치 필요 모듈**
+* bs4
+* requests
 
-bs4
-
-requests
-
-
-
-**실행방법 **
-
-1. mail_list.txt에 라인마다 이메일 계정 등록
-
-2. boho_mail.py의 구글 아이디 및 구글 앱 비밀번호 등록
-
+**사용 방법**
+1. mail_list.txt - 수신 이메일 계정 등록
+2. boho_mail.py - 구글 아이디 및 구글 앱 비밀번호 등록
 3. boho_mail.py 실행
-
 4. 신규게시물 발생 시 아래와 같이 알림메일 수신
 
 
