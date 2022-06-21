@@ -1,7 +1,6 @@
 import datetime
 import time
 from mail_func import *
-import PyQt5
 
 while True:
     print('Scanning : ' + str(datetime.datetime.now()))
