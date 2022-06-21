@@ -17,5 +17,9 @@ requests
 
 3. boho_mail.py 실행
 
+4. 신규게시물 발생 시 아래와 같이 알림메일 수신
+
+
+
 
 ![image](https://user-images.githubusercontent.com/29951014/174719982-0c13a25e-7cf3-4f31-bfe9-4d84e9629809.png)
