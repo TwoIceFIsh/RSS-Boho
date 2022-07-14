@@ -50,11 +50,6 @@ class Properties:
             return True
         return False
 
-    def get(self):
-        properties = configparser.ConfigParser()  ## 클래스 객체 생성
-        return properties.read('config.ini')  ## 파일
-
-
     def set(self):
         properties = configparser.ConfigParser()  ## 클래스 객체 생성
 
@@ -152,7 +147,7 @@ def get_data(url: str):
 
 def what_is_new_article(article_list: list, new_article_list: list):
     if article_list is None:
-        return []
+        return list(set(new_article_list))
     return sorted(list(set(new_article_list) - set(article_list)))
 
 
@@ -172,9 +167,10 @@ print('''
 |  |_)  |      |   (----`   |   (----` ______|  |_)  | |  |  |  | |  |__|  | |  |  |  | 
 |      /        \   \        \   \    |______|   _  <  |  |  |  | |   __   | |  |  |  | 
 |  |\  \----.----)   |   .----)   |          |  |_)  | |  `--'  | |  |  |  | |  `--'  | 
-| _| `._____|_______/    |_______/           |______/   \______/  |__|  |__|  \______/  
+| _| `._____|_______/    |_______/           |______/   \______/  |__|  |__|  \______/   v1.0
 
 ''')
+
 flag = 0
 while flag == 0:
     flag_num = input('시작하시겠습니까? [y/n] : ')
@@ -188,18 +184,39 @@ while flag == 0:
 if log.new_log_file():
     pass
 
+get_text_list(file_name='./mail_list.txt')
+get_text_list(file_name='./article_lists.txt')
+
+log.add_log(comment='소스코드 https://github.com/TwoIceFIsh/RSS-Boho')
+log.add_log(comment='설명 https://twoicefish-secu.tistory.com/428')
+
 if properties.new_config_file() is True:
     log.add_log(comment='[-] 새로운 설정 파일이 생성 되었습니다.')
     log.add_log(comment='[-] 설정 후 실행해 주세요.')
+    log.add_log(comment=f'[-] =======================================')
     log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\config.ini')
+    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\mail_list.txt')
+    log.add_log(comment=f'[-] =======================================')
     properties.set()
-    quit()
-    
-mail_list = get_text_list(file_name='./mail_list.txt')
+    os.system('pause')
+    sys.exit()
+
+propertiesq = configparser.ConfigParser()  ## 클래스 객체 생성
+propertiesq.read('.\\config.ini')  ## 파일 읽기
+default = propertiesq['DEFAULT']
+
+if 'myid@gmail.com' == default['google_gmail_id'] or 'xxxxyyyyzzzzqqqq' == default['google_app_pw']:
+    log.add_log(comment=f'[!] 자신만의 설정값으로 변경해 주세요')
+    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\config.ini')
+    os.system('pause')
+    sys.exit()
+
+
 if mail_list is None:
     log.add_log(comment=f'[!] 이메일 리스트가 비어 있습니다. 추가해주세요')
-    print('''
-            작성예시(mail_list.txt)
+    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\mail_list.txt')
+    print(f'''
+            작성예시({os.path.dirname(__file__)}\\mail_list.txt)
             
             asdfadsf@gmail.com
             sdijovjid@test.com
@@ -208,13 +225,14 @@ if mail_list is None:
             ...
             
             ''')
-    quit()
+    os.system('pause')
+    sys.exit()
 else:
     for i in mail_list:
         if '@' not in i or '.' not in i:
             log.add_log(comment=f'[!] {i} 올바른 이메일 형식이 아닙니다. 확인해 주세요')
-            print('''
-            작성예시(mail_list.txt)
+            print(f'''
+            작성예시({os.path.dirname(__file__)}\\mail_list.txt)
             
             asdfadsf@gmail.com
             sdijovjid@test.com
@@ -223,7 +241,8 @@ else:
             ...
             
             ''')
-            quit()
+            os.system('pause')
+            sys.exit()
 
 while True:
     log.add_log(comment=f'[-] ======RSS-BOHO Start======')
@@ -250,8 +269,6 @@ while True:
             log.add_log(comment=f'[!] (신규 게시글 정보 업데이트 스킵)')
         else:
 
-            p = properties.get()
-            default = p['DEFAULT']
             pid = default['google_gmail_id']
             ppw = default['google_app_pw']
 
@@ -259,14 +276,18 @@ while True:
                 message = send_mail(id=pid,pw=ppw,article=article_text, new_num=len(newest_article), to_ad=to)
                 if message ==9:
                     log.add_log(comment=f'[!] Google ID 및 Google API PW를 일치하지 않거나 존재하지 않습니다 확인해 주세요')
-                    log.add_log(comment=f'[!] 루틴 종료 15분후에 재발송을 시도 합니다.')
-                    break
+                    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\config.ini')
+                    os.system('pause')
+                    sys.exit()
+
                 else:
                     log.add_log(comment=f'[-] {mail_list}에게 메일을 발송했습니다.')
                     file_set_article(file_name='./article_lists.txt', articles=new_article_list)
                     log.add_log(comment=f'[-] 신규 게시글 정보 업데이트를 완료했습니다.')
+                    log.add_log(comment=f'{os.path.dirname(__file__)}\\article_lists.txt')
                     log.add_log(comment=f'[-] 루틴 종료 15분후에 재탐색을 실시 합니다.')
     else:
         log.add_log(comment=f'[-] 새롭게 발견된 기사가 없습니다.')
+        log.add_log(comment=f'[-] 루틴 종료 15분후에 재탐색을 실시 합니다.')
 
     time.sleep(900)
