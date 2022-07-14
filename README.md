@@ -9,6 +9,8 @@ KISA 인터넷 보호나라 신규 보안공지를 지정한 사람에게 메일
 
 **[설치방법]**
 
+0. Google 2단계 인증 적용
+
 1. Google 앱 비밀번호 발급
 
 2. config.ini의 google_app_pw에 Google 앱 비밀번호 입력
