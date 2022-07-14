@@ -184,7 +184,7 @@ while flag == 0:
 if log.new_log_file():
     pass
 
-get_text_list(file_name='./mail_list.txt')
+mail_list = get_text_list(file_name='./mail_list.txt')
 get_text_list(file_name='./article_lists.txt')
 
 log.add_log(comment='소스코드 https://github.com/TwoIceFIsh/RSS-Boho')
