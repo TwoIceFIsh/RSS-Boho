@@ -51,3 +51,7 @@ config.ini파일 에서 Google App PW 및 Google ID 확인
 
 https://twoicefish-secu.tistory.com/428
 
+
+**[설치없는 버전]**
+메일주소만 입력하여 회신받을 수 있습니다.
+https://www.kokonut.today/mail
