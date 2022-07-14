@@ -1,16 +1,16 @@
 import os
 import smtplib
+import sys
 import time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.utils import formataddr
 from datetime import datetime
 from threading import Thread
-
+import configparser
 from bs4 import BeautifulSoup
 
 import requests as requests
-
 
 class Log:
 
@@ -46,15 +46,31 @@ class Properties:
         if os.path.isfile(self.file_name) is False:
             with open(self.file_name,'w', encoding='utf-8') as f:
                 f.write(self.file_name)
+
             return True
         return False
 
+    def get(self):
+        properties = configparser.ConfigParser()  ## 클래스 객체 생성
+        return properties.read('config.ini')  ## 파일
 
-def send_mail(article: str, new_num: int, to_ad: str):
-    from_addr = formataddr(('SOCH', 'bh.lee@email.com'))
+
+    def set(self):
+        properties = configparser.ConfigParser()  ## 클래스 객체 생성
+
+        properties.set("DEFAULT", "google_gmail_id", "myid@gmail.com")
+        properties.set("DEFAULT", "google_app_pw", "xxxxyyyyzzzzqqqq")
+
+        with open(self.file_name, "w") as f:
+            properties.write(f)
+
+
+
+def send_mail(id:str,pw:str,article: str, new_num: int, to_ad: str):
+    from_addr = formataddr(('RSS-Boho', id))
 
     # 받는사람
-    to_addr = formataddr(('보안담당자', to_ad))
+    to_addr = formataddr(('담당자', to_ad))
 
     session = None
     try:
@@ -65,7 +81,7 @@ def send_mail(article: str, new_num: int, to_ad: str):
         # SMTP 계정 인증 설정
         session.ehlo()
         session.starttls()
-        session.login('GOOGLE_ID', 'APP_PW')
+        session.login(id, pw)
 
         # 메일 콘텐츠 설정
         message = MIMEMultipart("mixed")
@@ -76,7 +92,7 @@ def send_mail(article: str, new_num: int, to_ad: str):
         message['To'] = to_addr
         message['Subject'] = "[보안관제] KISA 보호나라 보안공지 신규 게시물 알림 (" + str(new_num) + "건)"
         # 메일 콘텐츠 - 내용
-        body = "보안공지 새로운 게시물을 알려드립니다.(❁´◡`❁)<br><br><br>" + article + "<br><br><br>문의 : Aiden Lee(이병호)<br>메일링 등록/해제 : https://www.kokonut.today/mail "
+        body = "보안공지 새로운 게시물을 알려드립니다.(❁´◡`❁)<br><br><br>" + article + ""
         bodyPart = MIMEText(body, 'html', 'utf-8')
         message.attach(bodyPart)
 
@@ -150,8 +166,6 @@ def article_to_html(newest_article: list):
 log = Log()
 properties = Properties()
 
-
-
 print('''
 .______          _______.     _______.       .______     ______    __    __    ______   
 |   _  \        /       |    /       |       |   _  \   /  __  \  |  |  |  |  /  __  \  
@@ -170,13 +184,49 @@ while flag == 0:
     if flag_num.lower() =='n':
         quit()
 
+
+if log.new_log_file():
+    pass
+
+if properties.new_config_file() is True:
+    log.add_log(comment='[-] 새로운 설정 파일이 생성 되었습니다.')
+    log.add_log(comment='[-] 설정 후 실행해 주세요.')
+    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\config.ini')
+    properties.set()
+    quit()
+    
+mail_list = get_text_list(file_name='./mail_list.txt')
+if mail_list is None:
+    log.add_log(comment=f'[!] 이메일 리스트가 비어 있습니다. 추가해주세요')
+    print('''
+            작성예시(mail_list.txt)
+            
+            asdfadsf@gmail.com
+            sdijovjid@test.com
+            sdjico@sdco.net
+            
+            ...
+            
+            ''')
+    quit()
+else:
+    for i in mail_list:
+        if '@' not in i or '.' not in i:
+            log.add_log(comment=f'[!] {i} 올바른 이메일 형식이 아닙니다. 확인해 주세요')
+            print('''
+            작성예시(mail_list.txt)
+            
+            asdfadsf@gmail.com
+            sdijovjid@test.com
+            sdjico@sdco.net
+            
+            ...
+            
+            ''')
+            quit()
+
 while True:
     log.add_log(comment=f'[-] ======RSS-BOHO Start======')
-    # 로그 파일 및 설정 파일 확인
-    if log.new_log_file():
-        log.add_log(comment='[-] 새로운 로그 파일이 생성 되었습니다.')
-    if properties.new_config_file():
-        log.add_log(comment='[-] 새로운 설정 파일이 생성 되었습니다.')
 
     # 신규 게시물 확인
     article_list = get_text_list(file_name='./article_lists.txt')
@@ -199,8 +249,14 @@ while True:
             log.add_log(comment=f'[!] 15분후에 메일 발송을 시도 합니다.')
             log.add_log(comment=f'[!] (신규 게시글 정보 업데이트 스킵)')
         else:
+
+            p = properties.get()
+            default = p['DEFAULT']
+            pid = default['google_gmail_id']
+            ppw = default['google_app_pw']
+
             for to in mail_list:
-                message = send_mail(article=article_text, new_num=len(newest_article), to_ad=to)
+                message = send_mail(id=pid,pw=ppw,article=article_text, new_num=len(newest_article), to_ad=to)
                 if message ==9:
                     log.add_log(comment=f'[!] Google ID 및 Google API PW를 일치하지 않거나 존재하지 않습니다 확인해 주세요')
                     log.add_log(comment=f'[!] 루틴 종료 15분후에 재발송을 시도 합니다.')
