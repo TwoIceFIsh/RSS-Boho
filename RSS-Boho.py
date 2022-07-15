@@ -86,7 +86,7 @@ class Boho:
             message['To'] = to_addr
             message['Subject'] = f"{title} (" + str(new_num) + "건)"
             # 메일 콘텐츠 - 내용
-            body = f"<br><br> {header} <br><br><br>" + article + "<br><br>" + footer + "<br>"
+            body = f"<br><br> {header} <br><br><br>" + article + "<br><br>" + footer + " <br>"
             bodyPart = MIMEText(body, 'html', 'utf-8')
             message.attach(bodyPart)
 
