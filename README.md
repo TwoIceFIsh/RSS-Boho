@@ -5,7 +5,7 @@
 
 ### [프로그램 정보]
 RSS-Boho 
-+ KISA 인터넷 보호나라 신규 보안공지를 지정한 사람에게 메일로 발송할 수 있습니다
++ KISA 인터넷 보호나라 신규 보안공지를 지정한 사람에게 메일로 발송할 수 있습니다.(15분마다 스캐닝)
 
   * 깃허브 주소 : https://github.com/TwoIceFIsh/RSS-Boho
 
@@ -20,7 +20,8 @@ RSS-Boho
 3. config.ini의 google_app_pw에 Google 앱 비밀번호 입력
 4. config.ini의 google_gmail_id 에 앱 비밀번호를 발급밥은 Google Email 입력
 5. mail_list.txt에 수신받을 메일 입력
-6. RSS-Boho.exe 실행
+6. 메일내용 설정(제목/헤더/푸터)
+7. RSS-Boho.exe 실행
 ```
 ---
 ### [설치방법 - 상세]
