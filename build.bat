@@ -1,0 +1,1 @@
+.\venv\Scripts\pyinstaller.exe --noconfirm --clean --icon=.\resources\antis.ico RSS-Boho.py -F
