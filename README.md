@@ -1,5 +1,4 @@
 ![](resources/logo.png)
-![](resources/l-img1.png)
 
 -----
 
@@ -27,6 +26,17 @@ RSS-Boho
 [twoicefsih-secu.tistory.com/428](https://twoicefish-secu.tistory.com/428)
 
 ---
+### [프로그램 실행 화면]
+1. 프로그램 실행 화면
+
+![](resources/l-img1.png)
+
+2. 결과 수신 화면
+
+![](resources/l-img2.png)
+
+---
+
 ### **[에러메시지]**
 
 ```c
