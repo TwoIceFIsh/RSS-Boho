@@ -1,15 +1,17 @@
-![](resources/logo.png)
+<p align="center"><img alt="" src="resources/logo.png"/> </p> 
 
 -----
 
 
 ### [프로그램 정보]
-RSS-Boho
+RSS-Boho 
 + KISA 인터넷 보호나라 신규 보안공지를 지정한 사람에게 메일로 발송할 수 있습니다
 
   * 깃허브 주소 : https://github.com/TwoIceFIsh/RSS-Boho
 
   * 다운로드 주소 : https://github.com/TwoIceFIsh/RSS-Boho/releases/latest
+* 문의
+  * Aiden Lee(team.k0konutz@gmail.com)
 ---
 ### [설치방법 - 기본]
 ```c
