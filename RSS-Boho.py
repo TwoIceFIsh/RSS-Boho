@@ -44,23 +44,23 @@ class Properties:
     def new_config_file(self):
         if os.path.isfile(self.file_name) is False:
             with open(self.file_name, 'w', encoding='utf-8') as f:
-                f.write(self.file_name)
+                f.write('')
 
             return True
         return False
 
     def set(self):
-        properties = configparser.ConfigParser()  ## 클래스 객체 생성
+        config = configparser.ConfigParser()  ## 클래스 객체 생성
 
-        properties.set("DEFAULT", "google_gmail_id", "myid@gmail.com")
-        properties.set("DEFAULT", "google_app_pw", "xxxxyyyyzzzzqqqq")
+        config["DEFAULT"] = {"google_gmail_id": "myid@gmail.com", "google_app_pw": "xxxxyyyyzzzzqqqq"}
+        config["MAIL_TEXT"] = {"title": "안녕하세요 OO 입니다.", "header": "안녕하세요 OO 입니다.", "footer": "문의사항 있으면 연락주세요"}
 
-        with open(self.file_name, "w") as f:
-            properties.write(f)
+        with open(self.file_name, "w", encoding='utf-8') as f:
+            config.write(f)
 
 
 class Boho:
-    def send_mail(id: str, pw: str, article: str, new_num: int, to_ad: str):
+    def send_mail(id: str, pw: str, article: str, new_num: int, to_ad: str, title: str, header: str, footer: str):
         from_addr = formataddr(('RSS-Boho', id))
 
         # 받는사람
@@ -84,9 +84,9 @@ class Boho:
             message.set_charset('utf-8')
             message['From'] = from_addr
             message['To'] = to_addr
-            message['Subject'] = "[보안관제] KISA 보호나라 보안공지 신규 게시물 알림 (" + str(new_num) + "건)"
+            message['Subject'] = f"{title} (" + str(new_num) + "건)"
             # 메일 콘텐츠 - 내용
-            body = "보안공지 새로운 게시물을 알려드립니다.(❁´◡`❁)<br><br><br>" + article + ""
+            body = f"<br><br> {header} <br><br><br>" + article + "<br><br>" + footer + "<br>"
             bodyPart = MIMEText(body, 'html', 'utf-8')
             message.attach(bodyPart)
 
@@ -195,8 +195,9 @@ if properties.new_config_file() is True:
     sys.exit()
 
 propertiesq = configparser.ConfigParser()  ## 클래스 객체 생성
-propertiesq.read('.\\config.ini')  ## 파일 읽기
+propertiesq.read('.\\config.ini', encoding='utf-8')
 default = propertiesq['DEFAULT']
+mail_text = propertiesq['MAIL_TEXT']
 
 if 'myid@gmail.com' == default['google_gmail_id'] or 'xxxxyyyyzzzzqqqq' == default['google_app_pw']:
     log.add_log(comment=f'[!] 자신만의 설정값으로 변경해 주세요')
@@ -263,9 +264,12 @@ while True:
 
             pid = default['google_gmail_id']
             ppw = default['google_app_pw']
-
+            header = mail_text['header']
+            footer = mail_text['footer']
+            title = mail_text['title']
             for to in mail_list:
-                message = Boho.send_mail(id=pid, pw=ppw, article=article_text, new_num=len(newest_article), to_ad=to)
+                message = Boho.send_mail(id=pid, pw=ppw, article=article_text, new_num=len(newest_article), to_ad=to,
+                                         title=title, header=header, footer=footer)
                 if message == 9:
                     log.add_log(comment=f'[!] Google ID 및 Google API PW를 일치하지 않거나 존재하지 않습니다 확인해 주세요')
                     log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\config.ini')
