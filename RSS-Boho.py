@@ -217,7 +217,7 @@ else:
         if '@' not in i or '.' not in i:
             log.add_log(comment=f'[!] {i} 올바른 이메일 형식이 아닙니다. 확인해 주세요')
             print(f'''
-            작성예시({os.path.dirname(__file__)}\\mail_list.txt)
+            작성예시({os.path.join(os.path.dirname(__file__),"mail_list.txt")})
             
             asdfadsf@gmail.com
             sdijovjid@test.com
@@ -264,7 +264,7 @@ while True:
                                          title=title, header=header, footer=footer)
                 if message == 9:
                     log.add_log(comment=f'[!] Google ID 및 Google API PW를 일치하지 않거나 존재하지 않습니다 확인해 주세요')
-                    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\config.ini')
+                    log.add_log(comment=f'[-] {os.path.join(os.path.dirname(__file__),"config.ini")}')
                     os.system('pause')
                     sys.exit()
 
@@ -272,7 +272,7 @@ while True:
                     log.add_log(comment=f'[-] {mail_list}에게 메일을 발송했습니다.')
                     Boho.file_set_article(file_name='./article_lists.txt', articles=new_article_list)
                     log.add_log(comment=f'[-] 신규 게시글 정보 업데이트를 완료했습니다.')
-                    log.add_log(comment=f'{os.path.dirname(__file__)}\\article_lists.txt')
+                    log.add_log(comment=f'{os.path.join(os.path.dirname(__file__),"article_lists.txt")}')
                     log.add_log(comment=f'[-] 루틴 종료 15분후에 재탐색을 실시 합니다.')
     else:
         log.add_log(comment=f'[-] 새롭게 발견된 기사가 없습니다.')
