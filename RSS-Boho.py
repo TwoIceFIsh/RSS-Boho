@@ -165,14 +165,6 @@ print('''
 
 ''')
 
-flag = 0
-while flag == 0:
-    flag_num = input('시작하시겠습니까? [y/n] : ')
-
-    if flag_num.lower() == 'y':
-        flag = 1
-    if flag_num.lower() == 'n':
-        quit()
 
 if log.new_log_file():
     pass
@@ -195,21 +187,21 @@ if properties.new_config_file() is True:
     sys.exit()
 
 propertiesq = configparser.ConfigParser()  ## 클래스 객체 생성
-propertiesq.read('.\\config.ini', encoding='utf-8')
+propertiesq.read('./config.ini', encoding='utf-8')
 default = propertiesq['DEFAULT']
 mail_text = propertiesq['MAIL_TEXT']
 
 if 'myid@gmail.com' == default['google_gmail_id'] or 'xxxxyyyyzzzzqqqq' == default['google_app_pw']:
     log.add_log(comment=f'[!] 자신만의 설정값으로 변경해 주세요')
-    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\config.ini')
+    log.add_log(comment=f'[-] {os.path.join(os.path.dirname(__file__),"config.ini")}')
     os.system('pause')
     sys.exit()
 
 if mail_list is None:
     log.add_log(comment=f'[!] 이메일 리스트가 비어 있습니다. 추가해주세요')
-    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\mail_list.txt')
+    log.add_log(comment=f'[-] {os.path.join(os.path.dirname(__file__),"mail_list.txt")}')
     print(f'''
-            작성예시({os.path.dirname(__file__)}\\mail_list.txt)
+            작성예시({os.path.join(os.path.dirname(__file__),"mail_list.txt")})
             
             asdfadsf@gmail.com
             sdijovjid@test.com

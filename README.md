@@ -4,7 +4,7 @@
 
 
 ### [프로그램 정보]
-RSS-Boho 
+RSS-Boho (Windows/Linux)
 + KISA 인터넷 보호나라 신규 보안공지를 지정한 사람에게 메일로 발송할 수 있습니다.(15분마다 스캐닝)
 
   * 깃허브 주소 : https://github.com/TwoIceFIsh/RSS-Boho
