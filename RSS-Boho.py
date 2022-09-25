@@ -176,7 +176,7 @@ log.add_log(comment='소스코드 https://github.com/TwoIceFIsh/RSS-Boho')
 log.add_log(comment='설명 https://twoicefish-secu.tistory.com/428')
 
 if properties.new_config_file() is True:
-    log.add_log(comment='[-] 새로운 설정 파일이 생성 되었습니다.')
+    log.add_log(comment='[-] 새로운 설정 파일이 생성 되었습니다!')
     log.add_log(comment='[-] 설정 후 실행해 주세요.')
     log.add_log(comment=f'[-] =======================================')
     log.add_log(comment=f'[-] {os.path.join(os.path.dirname(__file__),"config.ini")}')
