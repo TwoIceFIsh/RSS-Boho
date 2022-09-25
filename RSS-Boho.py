@@ -13,7 +13,7 @@ from bs4 import BeautifulSoup
 
 
 class Log:
-    # 오늘 일자로 파일 이름을 생성 한다.
+    # 오늘 일자로 파일 이름을 생성 한다.!!
     def __init__(self):
         self.file_name = f'.\\log{datetime.today().strftime("%Y-%m-%d")}.txt'
 
