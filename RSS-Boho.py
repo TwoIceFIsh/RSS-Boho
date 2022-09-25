@@ -39,7 +39,7 @@ class Log:
 class Properties:
 
     def __init__(self):
-        self.file_name = f'.\\config.ini'
+        self.file_name = f'./config.ini'
 
     def new_config_file(self):
         if os.path.isfile(self.file_name) is False:
@@ -61,7 +61,7 @@ class Properties:
 
 class Boho:
     def send_mail(id: str, pw: str, article: str, new_num: int, to_ad: str, title: str, header: str, footer: str):
-        from_addr = formataddr(('RSS-Boho', id))
+        from_addr = formataddr(('SOCH', id))
 
         # 받는사람
         to_addr = formataddr(('담당자', to_ad))
@@ -179,8 +179,8 @@ if properties.new_config_file() is True:
     log.add_log(comment='[-] 새로운 설정 파일이 생성 되었습니다.')
     log.add_log(comment='[-] 설정 후 실행해 주세요.')
     log.add_log(comment=f'[-] =======================================')
-    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\config.ini')
-    log.add_log(comment=f'[-] {os.path.dirname(__file__)}\\mail_list.txt')
+    log.add_log(comment=f'[-] {os.path.join(os.path.dirname(__file__),"config.ini")}')
+    log.add_log(comment=f'[-] {os.path.join(os.path.dirname(__file__),"mail_list.txt")}')
     log.add_log(comment=f'[-] =======================================')
     properties.set()
     os.system('pause')
