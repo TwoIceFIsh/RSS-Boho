@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 class Log:
     # 오늘 일자로 파일 이름을 생성 한다.!!
     def __init__(self):
-        self.file_name = f'.\\log{datetime.today().strftime("%Y-%m-%d")}.txt'
+        self.file_name = f'./log{datetime.today().strftime("%Y-%m-%d")}.txt'
 
     # 현재시간을 기준으로 로그를 파일에 작성 및 
     def add_log(self, comment: str):
