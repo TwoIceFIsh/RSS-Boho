@@ -234,7 +234,7 @@ while True:
 
     # 신규 게시물 확인
     article_list = Boho.get_text_list(file_name='./article_lists.txt')
-    new_article_list = Boho.get_data(url='https://www.boho.or.kr/data/secNoticeList.do')
+    new_article_list = Boho.get_data(url='https://www.boho.or.kr/kr/bbs/list.do?menuNo=205020&bbsId=B0000133')
     newest_article = Boho.what_is_new_article(article_list=article_list, new_article_list=new_article_list)
 
     # 이메일 목록을 획득 및 메일 발송
