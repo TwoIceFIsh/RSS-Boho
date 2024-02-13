@@ -64,6 +64,6 @@ RSS-Boho (Windows/Linux)
 
 메일주소만 입력하여 회신받을 수 있습니다.
 
-https://www.kokonut.wiki/mail
+https://mailing.cyber-luna.com/
 
 ---
